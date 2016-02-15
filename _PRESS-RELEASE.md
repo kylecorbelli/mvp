@@ -1,4 +1,4 @@
-# Project Name #
+# Province #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Shop for the perfect city for you.
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > For anyone who knows the grass is greener somewhere else.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Search for cities and towns online the same way you'd search for a home online. Filter by criteria, get the facts. Living in a city because it's just where you happen to be already is like marrying the first person you see outside on the morning of your eighteenth birthday. You wouldn't settle on a partner, so why settle on a city? Find a city you love for the city it is.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Many people aren't a good fit for the city they live in. For these people, there IS a better city out there for them and we're here to help them find it.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > With Province, you can search for cities and towns online the same way you'd search for a home online. Filter by criteria, get the facts, and find a city you love for the city it is.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "If the grass is greener somewhere else, why waste time where you're at?" -Kyle Corbelli
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Simply type in a city to get the facts and find out if it's a match.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "Province is so easy to use. In a matter of minutes, my wife and I were able to narrow down our city search to just a handful of towns. Now we live in the perfect place for us!" -Marv
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Head over to provice.com to find your perfect place.
