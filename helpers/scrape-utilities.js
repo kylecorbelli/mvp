@@ -110,7 +110,39 @@ var getIndeedStats = function(cityInputText, cityObj, done) {
   });
 };
 
-// getIndeedStats(process.argv[2], new City(), function(){});
+var getTruliaStats = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'trulia');
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
+      var medianHomePrice = $('#locationPriceModule')
+        .find('div')
+        .first()
+        .find('p')
+        .first()
+        .text()
+        .replace('$', '')
+        .replace(',', '')
+        .trim();
+      cityObj.medianHomePrice = parseInt(medianHomePrice);
+
+      var medianRent = $('#locationPriceModule')
+        .find('div:nth-child(3)')
+        .find('p')
+        .first()
+        .text()
+        .replace('$', '')
+        .replace(',', '')
+        .trim();
+      cityObj.medianRent = parseInt(medianRent);
+      done();
+    }
+  });
+};
+
+// getTruliaStats(process.argv[2], new City(), function(){});
 
 var createNewCity = function(cityInputText) {
   var newCity = new City();
@@ -124,6 +156,9 @@ var createNewCity = function(cityInputText) {
     },
     function(cb) {
       getIndeedStats(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getTruliaStats(cityInputText, newCity, cb);
     }
   ], function() {
     console.log(newCity); // maybe JSON.stringify it
@@ -158,8 +193,19 @@ function cityUrlEncode(cityString, dataSource) {
       var modifiedCityString = cityArr
         .join('+');
       return 'http://www.indeed.com/salary?q1=JavaScript&l1=' + modifiedCityString + '&tm=1';
+    },
+    trulia: function(cityArr) {
+      cityArr[cityArr.length - 1] = states[cityArr[cityArr.length - 1]];
+      for (var i = 0; i < cityArr.length; i++) {
+        cityArr[i] = cityArr[i][0].toUpperCase() + cityArr[i].slice(1);
+      }
+      var modifiedCityString = cityArr
+        .slice(0, (cityArr.length - 1))
+        .join('_');
+      return 'http://www.trulia.com/real_estate/' + modifiedCityString + '-' + cityArr[cityArr.length - 1] + '/';
     }
   };
   return sourceSpecificFn[dataSource](cityArr);
 }
 
+// cityUrlEncode(process.argv[2], 'trulia');
