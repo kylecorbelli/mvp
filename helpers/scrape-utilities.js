@@ -36,6 +36,13 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
     } else {
       var $ = cheerio.load(body);
 
+      // City Name
+      var cityName = $('h1.city')
+        .find('span')
+        .text()
+        .trim();
+      cityObj.name = cityName;
+
       // Total population
       var totalPopulation = $('#city-population')
         .contents()[1]
@@ -57,17 +64,34 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
       cityObj.populationDensity = parseInt(populationDensity);
 
       // Crime rating
+
+      var usAveCrime = $('#crime')
+        .find('tfoot')
+        .find('td')
+        .first()
+        .text()
+        .split('=')[1]
+        .trim()
+        .replace(')', '');
+      usAveCrime = parseFloat(usAveCrime);
+
       var crimeRating = $('#crime')
         .find('tfoot')
         .find('td')
         .last()
         .text()
         .trim();
-      cityObj.crimeRating = parseFloat(crimeRating);
+      cityObj.crimeRating = (parseFloat(crimeRating) / usAveCrime).toFixed(2);
       done();
     }
   });
 };
+
+var getIndeedStats = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'indeed');
+};
+
+// getCityDataStats(process.argv[2], new City(), function(){});
 
 var createNewCity = function(cityInputText) {
   var newCity = new City();
@@ -78,6 +102,9 @@ var createNewCity = function(cityInputText) {
     },
     function(cb) {
       getCityDataStats(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getIndeedStats(cityInputText, newCity, cb);
     }
   ], function() {
     console.log(newCity); // maybe JSON.stringify it
@@ -93,6 +120,7 @@ function cityUrlEncode(cityString, dataSource) {
     .toLowerCase()
     .replace(',', '')
     .split(' ');
+    // will then be of form ['san', 'diego', 'ca']
   sourceSpecificFn = {
     cityData: function(cityArr) {
       var modifiedCityString = cityArr
@@ -106,6 +134,9 @@ function cityUrlEncode(cityString, dataSource) {
         .slice(0, (cityArr.length - 1))
         .join('_');
       return 'http://www.bestplaces.net/climate/city/' + states[cityArr[cityArr.length - 1]] + '/' + modifiedCityString;
+    },
+    indeed: function(cityArr) {
+
     }
   };
   return sourceSpecificFn[dataSource](cityArr);
