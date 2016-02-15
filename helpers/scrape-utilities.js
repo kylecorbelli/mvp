@@ -89,9 +89,28 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
 
 var getIndeedStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'indeed');
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
+      var jsDevSalary = $('#salary_display_table')
+        .find('tbody')
+        .find('tr')
+        .first()
+        .find('td:nth-child(2)')
+        .find('span')
+        .text()
+        .trim()
+        .replace('$', '')
+        .replace(',', '');
+      cityObj.jsDevSalary = parseInt(jsDevSalary);
+      done();
+    }
+  });
 };
 
-// getCityDataStats(process.argv[2], new City(), function(){});
+// getIndeedStats(process.argv[2], new City(), function(){});
 
 var createNewCity = function(cityInputText) {
   var newCity = new City();
@@ -136,11 +155,11 @@ function cityUrlEncode(cityString, dataSource) {
       return 'http://www.bestplaces.net/climate/city/' + states[cityArr[cityArr.length - 1]] + '/' + modifiedCityString;
     },
     indeed: function(cityArr) {
-
+      var modifiedCityString = cityArr
+        .join('+');
+      return 'http://www.indeed.com/salary?q1=JavaScript&l1=' + modifiedCityString + '&tm=1';
     }
   };
   return sourceSpecificFn[dataSource](cityArr);
 }
-
-// console.log(cityUrlEncode(process.argv[2], 'sperling'));
 
