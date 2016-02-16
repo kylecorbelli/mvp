@@ -126,6 +126,14 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
         .text()
         .trim();
       cityObj.crimeIndex = (parseFloat(crimeIndex) / usAveCrime).toFixed(2);
+
+      // Poverty rate
+      var povertyRate = $('#poverty-level')
+        .text()
+        .split('%')[0]
+        .split(':')[1]
+        .trim();
+      cityObj.povertyRate = parseFloat(povertyRate).toFixed(1) + '%';
       done();
     }
   });
