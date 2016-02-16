@@ -60,13 +60,23 @@
               <td>{{ cityData2.povertyRate }}</td>
             </tr>
             <tr>
-              <td></td>
-              <td class="table-subtitle" colspan="2">Economy</td>
+              <td>Population over age 25 with at least a high school diplma</td>
+              <td>{{ cityData1.highSchoolOrHigher }}</td>
+              <td>{{ cityData2.highSchoolOrHigher }}</td>
             </tr>
             <tr>
-              <td>Unemployment rate</td>
-              <td>{{ cityData1.unemployment }}</td>
-              <td>{{ cityData2.unemployment }}</td>
+              <td>Population over age 25 with at least a bachelor's degree</td>
+              <td>{{ cityData1.bachelorsOrHigher }}</td>
+              <td>{{ cityData2.bachelorsOrHigher }}</td>
+            </tr>
+            <tr>
+              <td>Population over age 25 with a graduate or professional degree</td>
+              <td>{{ cityData1.graduateOrProfessional }}</td>
+              <td>{{ cityData2.graduateOrProfessional }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="table-subtitle" colspan="2">Economy</td>
             </tr>
             <tr>
               <td>Current number of JavaScript job openings</td>
@@ -82,6 +92,16 @@
               <td>JavaScript jobs per 1,000 people</td>
               <td>{{ cityData1.jsDevJobsPerThousand | number:1 }}</td>
               <td>{{ cityData2.jsDevJobsPerThousand | number:1 }}</td>
+            </tr>
+            <tr>
+              <td>Number of engineers' salary needed to afford living in this city</td>
+              <td>{{ cityData1.numberOfDevIncomesNeededToAfford | number:2 }}</td>
+              <td>{{ cityData2.numberOfDevIncomesNeededToAfford | number:2 }}</td>
+            </tr>
+            <tr>
+              <td>Unemployment rate</td>
+              <td>{{ cityData1.unemployment }}</td>
+              <td>{{ cityData2.unemployment }}</td>
             </tr>
             <tr>
               <td>Commute time</td>
@@ -116,6 +136,35 @@
               <td>Annual cost of housing</td>
               <td>{{ cityData1.annualCostOfHousing | number:0 }}</td>
               <td>{{ cityData2.annualCostOfHousing | number:0 }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="table-subtitle" colspan="2">Climate & Environment</td>
+            </tr>
+            <tr>
+              <td>Number of sunny days per year</td>
+              <td>{{ cityData1.sunnyDays | number:0 }}</td>
+              <td>{{ cityData2.sunnyDays | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Number of rainy days per year</td>
+              <td>{{ cityData1.rainyDays | number:0 }}</td>
+              <td>{{ cityData2.rainyDays | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Dollar cost of a sunny day</td>
+              <td>{{ cityData1.costOfASunnyDay | currency:'$':0 }}</td>
+              <td>{{ cityData2.costOfASunnyDay | currency:'$':0 }}</td>
+            </tr>
+            <tr>
+              <td>Square feet of outdoor space per person</td>
+              <td>{{ cityData1.outdoorSpacePerPerson | number:0 }}</td>
+              <td>{{ cityData2.outdoorSpacePerPerson | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Price per square foot of outdoor space</td>
+              <td>{{ cityData1.pricePerSqFtOfOutdoorSpace | currency:'$':2 }}</td>
+              <td>{{ cityData2.pricePerSqFtOfOutdoorSpace | currency:'$':2 }}</td>
             </tr>
           </tbody>
         </table>
