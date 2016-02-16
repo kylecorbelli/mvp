@@ -5,6 +5,7 @@ var City = function(name, totalPopulation, populationDensity, crimeRating) {
 City.prototype.constructor = City;
 City.prototype.computeStats = function() {
   this.jsDevJobsPerThousand = this.jsDevJobCount / this.totalPopulation * 1000;
+  this.outdoorSpacePerPerson = Math.pow(5280, 2) / this.populationDensity;
   if (isNaN(this.medianHomePrice)) {
     this.annualCostOfHousing = 12 * this.medianRent;
   } else {
@@ -14,7 +15,7 @@ City.prototype.computeStats = function() {
   }
   this.numberOfDevIncomesNeededToAfford = this.annualCostOfHousing / 0.35 / this.jsDevSalary;
   this.costOfASunnyDay = (this.jsDevSalary - this.annualCostOfHousing) / this.sunnyDays;
-  this.pricePerSqFtOfOutdoorSpace = (this.jsDevSalary - this.annualCostOfHousing) * this.populationDensity / Math.pow(5280, 2);
+  this.pricePerSqFtOfOutdoorSpace = (this.jsDevSalary - this.annualCostOfHousing) / this.outdoorSpacePerPerson;
 };
 
 // Helper function to compute monthy Principal, Interest, Taxes and Insurance
