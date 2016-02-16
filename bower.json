@@ -1,0 +1,15 @@
+{
+  "name": "province",
+  "version": "0.0.1",
+  "author": "Kyle Corbelli",
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/lib"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0"
+  }
+}
