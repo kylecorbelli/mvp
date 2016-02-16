@@ -23,6 +23,13 @@ var getSperlingStats = function(cityInputText, cityObj, done) {
         .text()
         .trim();
       cityObj.sunnyDays = parseInt(sunnyDays);
+
+      var rainyDays = $('#mainContent_dgClimate')
+        .find('tr:nth-child(4)')
+        .find('td:nth-child(2)')
+        .text()
+        .trim();
+      cityObj.rainyDays = parseInt(rainyDays);
       done();
     }
   });
@@ -100,7 +107,7 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
         .replace(',', '');
       cityObj.populationDensity = parseInt(populationDensity);
 
-      // Crime rating
+      // Crime index
 
       var usAveCrime = $('#crime')
         .find('tfoot')
@@ -112,13 +119,13 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
         .replace(')', '');
       usAveCrime = parseFloat(usAveCrime);
 
-      var crimeRating = $('#crime')
+      var crimeIndex = $('#crime')
         .find('tfoot')
         .find('td')
         .last()
         .text()
         .trim();
-      cityObj.crimeRating = (parseFloat(crimeRating) / usAveCrime).toFixed(2);
+      cityObj.crimeIndex = (parseFloat(crimeIndex) / usAveCrime).toFixed(2);
       done();
     }
   });
@@ -221,7 +228,6 @@ var getWikiPhoto = function(cityInputText, cityObj, done) {
 
 var createNewCity = function(cityInputText) {
   var newCity = new City();
-  newCity.name = cityInputText;
   async.parallel([
     function(cb) {
       getSperlingStats(cityInputText, newCity, cb);
