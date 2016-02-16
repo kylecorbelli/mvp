@@ -12,8 +12,10 @@ City.prototype.computeStats = function() {
     var annualPITI = 12 * monthlyMortgagePITI(this.medianHomePrice, this.thirtyYearMortgageRate, this.propertyTaxRate);
     this.annualCostOfHousing = (this.percentRenters * annualRent) + (this.percentOwnerOccs * annualPITI);
   }
+  this.numberOfDevIncomesNeededToAfford = this.annualCostOfHousing / 0.35 / this.jsDevSalary;
 };
 
+// Helper function to compute monthy Principal, Interest, Taxes and Insurance
 function monthlyMortgagePITI(salePrice, annualIntRate, propTaxRate) {
   // Assumptions
   var mortgageAmount = salePrice * 0.9;
