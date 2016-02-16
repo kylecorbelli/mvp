@@ -104,13 +104,13 @@
             </tr>
             <tr>
               <td>Percent of owner-occupants</td>
-              <td>{{ cityData1.percentOwnerOccs }}</td>
-              <td>{{ cityData2.percentOwnerOccs }}</td>
+              <td>{{ cityData1.percentOwnerOccs | percentage:0 }}</td>
+              <td>{{ cityData2.percentOwnerOccs | percentage:0 }}</td>
             </tr>
             <tr>
               <td>Percent of renters</td>
-              <td>{{ cityData1.percentRenters }}</td>
-              <td>{{ cityData2.percentRenters }}</td>
+              <td>{{ cityData1.percentRenters | percentage:0 }}</td>
+              <td>{{ cityData2.percentRenters | percentage:0 }}</td>
             </tr>
             <tr>
               <td>Annual cost of housing</td>
@@ -122,6 +122,7 @@
       </div>
     </div>
     <script src="/lib/angular/angular.min.js"></script>
+    <script src="/public/javascript/filters.js"></script>
     <script src="/public/javascript/services.js"></script>
     <script src="/public/javascript/provinceCtrl.js"></script>
     <script src="/public/javascript/app.js"></script>
