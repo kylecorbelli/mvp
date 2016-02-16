@@ -251,7 +251,6 @@ var getZillowStats = function(cityInputText, cityObj, done) {
 
 var getTruliaStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'trulia');
-  console.log(cityUrl);
   request.get(cityUrl, function(err, res, body) {
     if (err) {
       console.error(err);
