@@ -7,7 +7,8 @@ var states = {
   ca: 'california',
   mi: 'michigan',
   nc: 'north-carolina',
-  or: 'oregon'
+  or: 'oregon',
+  tx: 'texas'
 };
 
 var getSperlingStats = function(cityInputText, cityObj, done) {
@@ -225,26 +226,37 @@ var getIndeedCountStats = function(cityInputText, cityObj, done) {
   });
 };
 
-// getIndeedCountStats(process.argv[2], new City(), function(){});
-
-var getTruliaStats = function(cityInputText, cityObj, done) {
-  var cityUrl = cityUrlEncode(cityInputText, 'trulia');
+var getZillowStats = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'zillow');
   request.get(cityUrl, function(err, res, body) {
     if (err) {
       console.error(err);
     } else {
       var $ = cheerio.load(body);
-      var medianHomePrice = $('#locationPriceModule')
-        .find('div')
+      var medianHomePrice = $('#region-info')
+        .find('.region-info-item')
         .first()
-        .find('p')
-        .first()
+        .find('h2')
         .text()
-        .replace('$', '')
+        .trim()
         .replace(/,/g, '')
-        .trim();
+        .replace('$', '');
       cityObj.medianHomePrice = parseInt(medianHomePrice);
+      done();
+    }
+  });
+};
 
+// getZillowStats(process.argv[2], new City(), function(){});
+
+var getTruliaStats = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'trulia');
+  console.log(cityUrl);
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
       var medianRent = $('#locationPriceModule')
         .find('div:nth-child(3)')
         .find('p')
@@ -324,8 +336,12 @@ var createNewCity = function(cityInputText) {
     },
     function(cb) {
       getWikiPhoto(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getZillowStats(cityInputText, newCity, cb);
     }
   ], function() {
+    newCity.computeStats();
     console.log(newCity); // maybe JSON.stringify it
   });
 };
@@ -377,6 +393,9 @@ function cityUrlEncode(cityString, dataSource) {
         .join('_');
       return 'http://www.trulia.com/real_estate/' + modifiedCityString + '-' + cityArr[cityArr.length - 1] + '/';
     },
+    zillow: function(cityArr) {
+      return 'http://www.zillow.com/' + cityArr.join('-') + '/home-values/';
+    },
     wikipedia: function(cityArr) {
       cityArr[cityArr.length - 1] = states[cityArr[cityArr.length - 1]];
       for (var i = 0; i < cityArr.length; i++) {
@@ -391,4 +410,4 @@ function cityUrlEncode(cityString, dataSource) {
   return sourceSpecificFn[dataSource](cityArr);
 }
 
-// console.log(cityUrlEncode(process.argv[2], 'indeedCount'));
+// console.log(cityUrlEncode(process.argv[2], 'zillow'));
