@@ -2,11 +2,16 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/public/stylesheets/style.css' />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/stylesheets/style.css" />
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body ng-app="province">
+    <div class="container">
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+    </div>
     <script src="/lib/angular/angular.min.js"></script>
+    <script src="/public/javascript/provinceCtrl.js"></script>
+    <script src="/public/javascript/app.js"></script>
   </body>
 </html>
