@@ -200,7 +200,24 @@ var getMortgageStats = function(cityInputText, cityObj, done) {
   });
 };
 
-// getMortgageStats(process.argv[2], new City(), function(){});
+var getWikiPhoto = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'wikipedia');
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
+      var cityPhoto = $('img')
+        .first()
+        .attr('src')
+        .trim();
+      cityObj.imageUrl = cityPhoto;
+      done();
+    }
+  });
+};
+
+// getWikiPhoto(process.argv[2], new City(), function(){});
 
 var createNewCity = function(cityInputText) {
   var newCity = new City();
@@ -223,6 +240,9 @@ var createNewCity = function(cityInputText) {
     },
     function(cb) {
       getMortgageStats(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getWikiPhoto(cityInputText, newCity, cb);
     }
   ], function() {
     console.log(newCity); // maybe JSON.stringify it
@@ -270,9 +290,19 @@ function cityUrlEncode(cityString, dataSource) {
         .slice(0, (cityArr.length - 1))
         .join('_');
       return 'http://www.trulia.com/real_estate/' + modifiedCityString + '-' + cityArr[cityArr.length - 1] + '/';
+    },
+    wikipedia: function(cityArr) {
+      cityArr[cityArr.length - 1] = states[cityArr[cityArr.length - 1]];
+      for (var i = 0; i < cityArr.length; i++) {
+        cityArr[i] = cityArr[i][0].toUpperCase() + cityArr[i].slice(1);
+      }
+      var modifiedCityString = cityArr
+        .slice(0, (cityArr.length - 1))
+        .join('_');
+      return 'https://en.wikipedia.org/wiki/' + modifiedCityString + ',_' + cityArr[cityArr.length - 1];
     }
   };
   return sourceSpecificFn[dataSource](cityArr);
 }
 
-// console.log(cityUrlEncode(process.argv[2], 'sperlingHousing'));
+// console.log(cityUrlEncode(process.argv[2], 'wikipedia'));
