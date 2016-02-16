@@ -9,14 +9,60 @@
     <div class="container" ng-controller="provinceCtrl">
       <h1><%= title %></h1>
       <p>Welcome to <%= title %></p>
-      <form ng-submit="findCity()">
-        <div class="input-group">
-          <input class="form-control" type="text" ng-model="citySearch">
-          <span class="input-group-btn">
-            <button class="btn btn-primary">Find City</button>
-          </span>
+      <form ng-submit="findCities()">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="first city for comparison..." ng-model="citySearch1">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="second city for comparison..." ng-model="citySearch2">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary">Find Cities</button>
         </div>
       </form>
+      <div class="well" ng-show="cityData1 && cityData2">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>{{ cityData1.name }}</th>
+              <th>{{ cityData2.name }}</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th><img ng-src="{{ cityData1.imageUrl }}" alt="{{ cityData1.name }}"></th>
+              <th><img ng-src="{{ cityData2.imageUrl }}" alt="{{ cityData2.name }}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Average JavaScript developer salary</td>
+              <td>{{ cityData1.jsDevSalary }}</td>
+              <td>{{ cityData2.jsDevSalary }}</td>
+            </tr>
+            <tr>
+              <td>Current number of JavaScript job openings</td>
+              <td>{{ cityData1.jsDevJobCount }}</td>
+              <td>{{ cityData2.jsDevJobCount }}</td>
+            </tr>
+            <tr>
+              <td>JavaScript jobs per 1,000 people</td>
+              <td>{{ cityData1.jsDevJobsPerThousand }}</td>
+              <td>{{ cityData2.jsDevJobsPerThousand }}</td>
+            </tr>
+            <tr>
+              <td>Total population</td>
+              <td>{{ cityData1.totalPopulation }}</td>
+              <td>{{ cityData2.totalPopulation }}</td>
+            </tr>
+            <tr>
+              <td>Population density</td>
+              <td>{{ cityData1.populationDensity }}</td>
+              <td>{{ cityData2.populationDensity }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <script src="/lib/angular/angular.min.js"></script>
     <script src="/public/javascript/services.js"></script>
