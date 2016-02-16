@@ -11,3 +11,15 @@ a {
   text-align: center;
   font-weight: bold;
 }
+
+table th {
+  text-align: center;
+}
+
+table td {
+  text-align: center;
+}
+
+table tr td:first-child {
+  text-align: left;
+}
