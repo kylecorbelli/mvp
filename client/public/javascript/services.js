@@ -1,4 +1,17 @@
 angular.module('province.services', [])
   .factory('Cities', function($http) {
-    return [];
+    var findCity = function(cityNameText) {
+      return $http({
+        method: 'POST',
+        url: '/city',
+        data: {
+          cityNameText: cityNameText
+        }
+      });
+    };
+    return {
+      findCity: findCity
+    };
   });
+
+  
