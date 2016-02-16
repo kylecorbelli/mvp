@@ -298,7 +298,12 @@ var getWikiPhoto = function(cityInputText, cityObj, done) {
       console.error(err);
     } else {
       var $ = cheerio.load(body);
-      var cityPhoto = $('img')
+      var cityPhoto = $('#mw-content-text')
+        .find('table')
+        .first()
+        .find('a.image')
+        .first()
+        .find('img')
         .first()
         .attr('src')
         .trim();
