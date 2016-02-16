@@ -9,7 +9,7 @@
     <div class="container" ng-controller="provinceCtrl">
       <h1><%= title %></h1>
       <p>Welcome to <%= title %></p>
-      <form ng-submit="doThang()">
+      <form ng-submit="findCity()">
         <div class="input-group">
           <input class="form-control" type="text" ng-model="citySearch">
           <span class="input-group-btn">
@@ -17,7 +17,6 @@
           </span>
         </div>
       </form>
-      <p>{{ citySearch }}</p>
     </div>
     <script src="/lib/angular/angular.min.js"></script>
     <script src="/public/javascript/services.js"></script>
