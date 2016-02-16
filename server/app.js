@@ -5,9 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var scrape = require('../helpers/scrape-utilities');
-var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/province');
+var dbUtil = require('../helpers/db-utilities');
 
 var app = express();
 
@@ -31,9 +29,22 @@ app.get('/', function(req, res) {
 app.post('/city', function(req, res) {
   console.log('post request with req.body:');
   console.log(req.body);
-  scrape.createNewCity(req.body.cityNameText, function(city) {
-    console.log('should be done');
-    res.json(city);
+  var cityNameInputText = req.body.cityNameText;
+  scrape.getUniqueCityName(cityNameInputText, function(uniqueCityName) {
+    dbUtil.isInDatabase(uniqueCityName, function(found) {
+      if (found) {
+        dbUtil.fetchCity(uniqueCityName, function(city) {
+          res.json(city);
+        });
+      } else {
+        scrape.createNewCity(cityNameInputText, function(city) {
+          console.log('should be done');
+          dbUtil.insertCity(city, function() {
+            res.json(city);
+          });
+        });
+      }
+    });
   });
 });
 
