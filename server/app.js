@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var scrape = require('../helpers/scrape-utilities');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/province');
 
 var app = express();
 
