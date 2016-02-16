@@ -52,13 +52,18 @@ var getSperlingHousingStats = function(cityInputText, cityObj, done) {
       var totalOccupied = (percentOwnerOccs + percentRenters);
       cityObj.percentRenters = percentRenters / totalOccupied;
       cityObj.percentOwnerOccs = percentOwnerOccs / totalOccupied;
+
+      var propertyTaxRate = $('#mainContent_dgHousing')
+        .find('tr:nth-child(7)')
+        .find('td:nth-child(2)')
+        .text()
+        .replace('$', '');
+      cityObj.propertyTaxRate = parseFloat(propertyTaxRate) / 1000;
+
       done();
     }
   });
 };
-
-// getSperlingHousingStats(process.argv[2], new City(), function(){});
-
 
 var getCityDataStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'cityData');
@@ -174,6 +179,29 @@ var getTruliaStats = function(cityInputText, cityObj, done) {
   });
 };
 
+var getMortgageStats = function(cityInputText, cityObj, done) {
+  var cityUrl = 'http://www.bankrate.com/finance/mortgages/current-interest-rates.aspx';
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.erro(err);
+    } else {
+      var $ = cheerio.load(body);
+      var thirtyYearMortgageRate = $('.rate_averages_mod')
+        .find('tr.rate_change_up')
+        .first()
+        .find('td.rate')
+        .find('a')
+        .text()
+        .trim()
+        .replace('%', '');
+      cityObj.thirtyYearMortgageRate = parseFloat(thirtyYearMortgageRate) / 100;
+      done();
+    }
+  });
+};
+
+// getMortgageStats(process.argv[2], new City(), function(){});
+
 var createNewCity = function(cityInputText) {
   var newCity = new City();
   newCity.name = cityInputText;
@@ -192,6 +220,9 @@ var createNewCity = function(cityInputText) {
     },
     function(cb) {
       getTruliaStats(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getMortgageStats(cityInputText, newCity, cb);
     }
   ], function() {
     console.log(newCity); // maybe JSON.stringify it
