@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.table-subtitle {
+  text-align: center;
+  font-weight: bold;
+}

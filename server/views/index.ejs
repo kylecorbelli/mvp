@@ -36,29 +36,86 @@
           </thead>
           <tbody>
             <tr>
-              <td>Average JavaScript developer salary</td>
-              <td>{{ cityData1.jsDevSalary }}</td>
-              <td>{{ cityData2.jsDevSalary }}</td>
-            </tr>
-            <tr>
-              <td>Current number of JavaScript job openings</td>
-              <td>{{ cityData1.jsDevJobCount }}</td>
-              <td>{{ cityData2.jsDevJobCount }}</td>
-            </tr>
-            <tr>
-              <td>JavaScript jobs per 1,000 people</td>
-              <td>{{ cityData1.jsDevJobsPerThousand }}</td>
-              <td>{{ cityData2.jsDevJobsPerThousand }}</td>
+              <td></td>
+              <td class="table-subtitle" colspan="2">Population</td>
             </tr>
             <tr>
               <td>Total population</td>
-              <td>{{ cityData1.totalPopulation }}</td>
-              <td>{{ cityData2.totalPopulation }}</td>
+              <td>{{ cityData1.totalPopulation | number:0 }}</td>
+              <td>{{ cityData2.totalPopulation | number:0 }}</td>
             </tr>
             <tr>
               <td>Population density</td>
-              <td>{{ cityData1.populationDensity }}</td>
-              <td>{{ cityData2.populationDensity }}</td>
+              <td>{{ cityData1.populationDensity | number:0 }}</td>
+              <td>{{ cityData2.populationDensity | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Crime Index</td>
+              <td>{{ cityData1.crimeIndex | number:2 }}</td>
+              <td>{{ cityData2.crimeIndex | number:2 }}</td>
+            </tr>
+            <tr>
+              <td>Poverty Rate</td>
+              <td>{{ cityData1.povertyRate }}</td>
+              <td>{{ cityData2.povertyRate }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="table-subtitle" colspan="2">Economy</td>
+            </tr>
+            <tr>
+              <td>Unemployment rate</td>
+              <td>{{ cityData1.unemployment }}</td>
+              <td>{{ cityData2.unemployment }}</td>
+            </tr>
+            <tr>
+              <td>Current number of JavaScript job openings</td>
+              <td>{{ cityData1.jsDevJobCount | number:0 }}</td>
+              <td>{{ cityData2.jsDevJobCount | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Average JavaScript developer salary</td>
+              <td>{{ cityData1.jsDevSalary | number:0 }}</td>
+              <td>{{ cityData2.jsDevSalary | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>JavaScript jobs per 1,000 people</td>
+              <td>{{ cityData1.jsDevJobsPerThousand | number:1 }}</td>
+              <td>{{ cityData2.jsDevJobsPerThousand | number:1 }}</td>
+            </tr>
+            <tr>
+              <td>Commute time</td>
+              <td>{{ cityData1.averageCommute }}</td>
+              <td>{{ cityData2.averageCommute }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="table-subtitle" colspan="2">Housing</td>
+            </tr>
+            <tr>
+              <td>Median home price</td>
+              <td>{{ cityData1.medianHomePrice | number:0 }}</td>
+              <td>{{ cityData2.medianHomePrice | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Median monthly rent</td>
+              <td>{{ cityData1.medianRent | number:0 }}</td>
+              <td>{{ cityData2.medianRent | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Percent of owner-occupants</td>
+              <td>{{ cityData1.percentOwnerOccs }}</td>
+              <td>{{ cityData2.percentOwnerOccs }}</td>
+            </tr>
+            <tr>
+              <td>Percent of renters</td>
+              <td>{{ cityData1.percentRenters }}</td>
+              <td>{{ cityData2.percentRenters }}</td>
+            </tr>
+            <tr>
+              <td>Annual cost of housing</td>
+              <td>{{ cityData1.annualCostOfHousing | number:0 }}</td>
+              <td>{{ cityData2.annualCostOfHousing | number:0 }}</td>
             </tr>
           </tbody>
         </table>
