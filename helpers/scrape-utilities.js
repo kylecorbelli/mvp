@@ -309,7 +309,7 @@ var getWikiPhoto = function(cityInputText, cityObj, done) {
 };
 
 
-var createNewCity = function(cityInputText) {
+var createNewCity = function(cityInputText, callback) {
   var newCity = new City();
   async.parallel([
     function(cb) {
@@ -341,11 +341,14 @@ var createNewCity = function(cityInputText) {
     }
   ], function() {
     newCity.computeStats();
-    console.log(newCity); // maybe JSON.stringify it
+    callback(newCity);
+    // console.log(newCity); // maybe JSON.stringify it
   });
 };
 
-createNewCity(process.argv[2]);
+module.exports.createNewCity = createNewCity;
+
+// createNewCity(process.argv[2]);
 
 function cityUrlEncode(cityString, dataSource) {
   // of form 'San Diego, CA'
