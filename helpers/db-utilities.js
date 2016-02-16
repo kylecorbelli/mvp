@@ -14,7 +14,6 @@ module.exports.isInDatabase = function(cityName, callback) {
     } else {
       callback(false);
     }
-    db.close();
   });
 };
 
@@ -26,8 +25,22 @@ module.exports.fetchCity = function(cityName, callback) {
     if (city) {
       callback(city);
     }
-    db.close();
+  });
+};
+
+module.exports.insertCity = function(cityObj, callback) {
+  var newCity = new City(cityObj);
+  newCity.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    callback();
   });
 };
 
 // isInDatabase(process.argv[2]);
+
+// module.exports.insertCity({name: "San Clemente, CA"}, function(city) {
+//   console.log('new city:');
+//   console.log(city);
+// });
