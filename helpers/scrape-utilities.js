@@ -2,15 +2,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
 var City = require('./city-class');
-
-var states = {
-  ca: 'california',
-  mi: 'michigan',
-  nc: 'north-carolina',
-  or: 'oregon',
-  sc: 'south-carolina',
-  tx: 'texas'
-};
+var states = require('./states.js');
 
 var getSperlingStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'sperling');
