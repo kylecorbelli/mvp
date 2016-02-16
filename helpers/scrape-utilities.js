@@ -28,6 +28,38 @@ var getSperlingStats = function(cityInputText, cityObj, done) {
   });
 };
 
+var getSperlingHousingStats = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'sperlingHousing');
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
+      var percentOwnerOccs = $('#mainContent_dgHousing')
+        .find('tr:nth-child(8)')
+        .find('td:nth-child(2)')
+        .text()
+        .replace('%', '');
+      percentOwnerOccs = parseFloat(percentOwnerOccs);
+
+      var percentRenters = $('#mainContent_dgHousing')
+        .find('tr:nth-child(10)')
+        .find('td:nth-child(2)')
+        .text()
+        .replace('%', '');
+      percentRenters = parseFloat(percentRenters);
+
+      var totalOccupied = (percentOwnerOccs + percentRenters);
+      cityObj.percentRenters = percentRenters / totalOccupied;
+      cityObj.percentOwnerOccs = percentOwnerOccs / totalOccupied;
+      done();
+    }
+  });
+};
+
+// getSperlingHousingStats(process.argv[2], new City(), function(){});
+
+
 var getCityDataStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'cityData');
   request.get(cityUrl, function(err, res, body) {
@@ -142,14 +174,15 @@ var getTruliaStats = function(cityInputText, cityObj, done) {
   });
 };
 
-// getTruliaStats(process.argv[2], new City(), function(){});
-
 var createNewCity = function(cityInputText) {
   var newCity = new City();
   newCity.name = cityInputText;
   async.parallel([
     function(cb) {
       getSperlingStats(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getSperlingHousingStats(cityInputText, newCity, cb);
     },
     function(cb) {
       getCityDataStats(cityInputText, newCity, cb);
@@ -175,7 +208,7 @@ function cityUrlEncode(cityString, dataSource) {
     .replace(',', '')
     .split(' ');
     // will then be of form ['san', 'diego', 'ca']
-  sourceSpecificFn = {
+  var sourceSpecificFn = {
     cityData: function(cityArr) {
       var modifiedCityString = cityArr
         .slice(0, (cityArr.length - 1))
@@ -188,6 +221,9 @@ function cityUrlEncode(cityString, dataSource) {
         .slice(0, (cityArr.length - 1))
         .join('_');
       return 'http://www.bestplaces.net/climate/city/' + states[cityArr[cityArr.length - 1]] + '/' + modifiedCityString;
+    },
+    sperlingHousing: function(cityArr) {
+      return sourceSpecificFn.sperling(cityArr).replace('climate', 'housing');
     },
     indeed: function(cityArr) {
       var modifiedCityString = cityArr
@@ -208,4 +244,4 @@ function cityUrlEncode(cityString, dataSource) {
   return sourceSpecificFn[dataSource](cityArr);
 }
 
-// cityUrlEncode(process.argv[2], 'trulia');
+// console.log(cityUrlEncode(process.argv[2], 'sperlingHousing'));
