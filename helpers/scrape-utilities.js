@@ -274,7 +274,7 @@ var getMortgageStats = function(cityInputText, cityObj, done) {
   var cityUrl = 'http://www.bankrate.com/finance/mortgages/current-interest-rates.aspx';
   request.get(cityUrl, function(err, res, body) {
     if (err) {
-      console.erro(err);
+      console.error(err);
     } else {
       var $ = cheerio.load(body);
       var thirtyYearMortgageRate = $('.rate_averages_mod')
