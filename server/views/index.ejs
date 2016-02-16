@@ -147,14 +147,29 @@
               <td>{{ cityData2.sunnyDays | number:0 }}</td>
             </tr>
             <tr>
+              <td>Dollar cost of a sunny day</td>
+              <td>{{ cityData1.costOfASunnyDay | currency:'$':0 }}</td>
+              <td>{{ cityData2.costOfASunnyDay | currency:'$':0 }}</td>
+            </tr>
+            <tr>
               <td>Number of rainy days per year</td>
               <td>{{ cityData1.rainyDays | number:0 }}</td>
               <td>{{ cityData2.rainyDays | number:0 }}</td>
             </tr>
             <tr>
-              <td>Dollar cost of a sunny day</td>
-              <td>{{ cityData1.costOfASunnyDay | currency:'$':0 }}</td>
-              <td>{{ cityData2.costOfASunnyDay | currency:'$':0 }}</td>
+              <td>Annual snowfall (in.)</td>
+              <td>{{ cityData1.snowfall | number:1 }}</td>
+              <td>{{ cityData2.snowfall | number:1 }}</td>
+            </tr>
+            <tr>
+              <td>Average July high temperature</td>
+              <td>{{ cityData1.julyHigh | number:0 }}</td>
+              <td>{{ cityData2.julyHigh | number:0 }}</td>
+            </tr>
+            <tr>
+              <td>Average January low temperature</td>
+              <td>{{ cityData1.januaryLow | number:0 }}</td>
+              <td>{{ cityData2.januaryLow | number:0 }}</td>
             </tr>
             <tr>
               <td>Square feet of outdoor space per person</td>
