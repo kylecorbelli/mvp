@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var scrape = require('../helpers/scrape-utilities');
 
 var app = express();
 
@@ -27,7 +28,10 @@ app.get('/', function(req, res) {
 app.post('/city', function(req, res) {
   console.log('post request with req.body:');
   console.log(req.body);
-  res.send('success');
+  scrape.createNewCity(req.body.cityNameText, function(city) {
+    console.log('should be done');
+    res.json(city);
+  });
 });
 
 // catch 404 and forward to error handler
