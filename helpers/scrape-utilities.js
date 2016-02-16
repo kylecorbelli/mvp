@@ -4,6 +4,22 @@ var async = require('async');
 var City = require('./city-class');
 var states = require('./states.js');
 
+module.exports.getUniqueCityName = function(cityInputText, callback) {
+  var cityUrl = cityUrlEncode(cityInputText, 'cityData');
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
+      var cityName = $('h1.city')
+        .find('span')
+        .text()
+        .trim();
+      callback(cityName);
+    }
+  });
+};
+
 var getSperlingStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'sperling');
   request.get(cityUrl, function(err, res, body) {
