@@ -134,6 +134,52 @@ var getCityDataStats = function(cityInputText, cityObj, done) {
         .split(':')[1]
         .trim();
       cityObj.povertyRate = parseFloat(povertyRate).toFixed(1) + '%';
+
+      // High school or higher:
+      var highSchoolOrHigher = $('#education-info')
+        .find('ul')
+        .find('li:nth-child(1)')
+        .text()
+        .split(':')[1]
+        .trim();
+      cityObj.highSchoolOrHigher = highSchoolOrHigher;
+
+      // BA or higher:
+      var bachelorsOrHigher = $('#education-info')
+        .find('ul')
+        .find('li:nth-child(2)')
+        .text()
+        .split(':')[1]
+        .trim();
+      cityObj.bachelorsOrHigher = bachelorsOrHigher;
+
+      // Graduate or professional:
+      var graduateOrProfessional = $('#education-info')
+        .find('ul')
+        .find('li:nth-child(3)')
+        .text()
+        .split(':')[1]
+        .trim();
+      cityObj.graduateOrProfessional = graduateOrProfessional;
+
+      // Unemployment:
+      var unemployment = $('#education-info')
+        .find('ul')
+        .find('li:nth-child(4)')
+        .text()
+        .split(':')[1]
+        .trim();
+      cityObj.unemployment = unemployment;
+
+      // Average commute:
+      var averageCommute = $('#education-info')
+        .find('ul')
+        .find('li:nth-child(5)')
+        .text()
+        .split(':')[1]
+        .trim();
+      cityObj.averageCommute = averageCommute;
+
       done();
     }
   });
@@ -176,7 +222,7 @@ var getTruliaStats = function(cityInputText, cityObj, done) {
         .first()
         .text()
         .replace('$', '')
-        .replace(',', '')
+        .replace(/,/g, '')
         .trim();
       cityObj.medianHomePrice = parseInt(medianHomePrice);
 
