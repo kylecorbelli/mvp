@@ -208,6 +208,25 @@ var getIndeedStats = function(cityInputText, cityObj, done) {
   });
 };
 
+var getIndeedCountStats = function(cityInputText, cityObj, done) {
+  var cityUrl = cityUrlEncode(cityInputText, 'indeedCount');
+  request.get(cityUrl, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      var $ = cheerio.load(body);
+      var jsDevJobCount = $('#searchCount')
+        .text()
+        .replace(/,/g, '')
+        .split(' ');
+      cityObj.jsDevJobCount = parseInt(jsDevJobCount[jsDevJobCount.length - 1].trim());
+      done();
+    }
+  });
+};
+
+// getIndeedCountStats(process.argv[2], new City(), function(){});
+
 var getTruliaStats = function(cityInputText, cityObj, done) {
   var cityUrl = cityUrlEncode(cityInputText, 'trulia');
   request.get(cityUrl, function(err, res, body) {
@@ -278,7 +297,6 @@ var getWikiPhoto = function(cityInputText, cityObj, done) {
   });
 };
 
-// getWikiPhoto(process.argv[2], new City(), function(){});
 
 var createNewCity = function(cityInputText) {
   var newCity = new City();
@@ -294,6 +312,9 @@ var createNewCity = function(cityInputText) {
     },
     function(cb) {
       getIndeedStats(cityInputText, newCity, cb);
+    },
+    function(cb) {
+      getIndeedCountStats(cityInputText, newCity, cb);
     },
     function(cb) {
       getTruliaStats(cityInputText, newCity, cb);
@@ -341,6 +362,11 @@ function cityUrlEncode(cityString, dataSource) {
         .join('+');
       return 'http://www.indeed.com/salary?q1=JavaScript&l1=' + modifiedCityString + '&tm=1';
     },
+    indeedCount: function() {
+      var modifiedCityString = cityArr
+        .join('+');
+      return 'http://www.indeed.com/jobs?q=JavaScript&l=' + modifiedCityString;
+    },
     trulia: function(cityArr) {
       cityArr[cityArr.length - 1] = states[cityArr[cityArr.length - 1]];
       for (var i = 0; i < cityArr.length; i++) {
@@ -365,4 +391,4 @@ function cityUrlEncode(cityString, dataSource) {
   return sourceSpecificFn[dataSource](cityArr);
 }
 
-// console.log(cityUrlEncode(process.argv[2], 'wikipedia'));
+// console.log(cityUrlEncode(process.argv[2], 'indeedCount'));
