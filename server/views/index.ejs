@@ -6,11 +6,17 @@
     <link rel="stylesheet" href="/public/stylesheets/style.css" />
   </head>
   <body ng-app="province">
-    <div class="container">
+    <div class="container" ng-controller="provinceCtrl">
       <h1><%= title %></h1>
       <p>Welcome to <%= title %></p>
+      <form ng-submit="doThang()">
+        <input type="text" ng-model="citySearch">
+        <button class="btn btn-primary">Find City</button>
+      </form>
+      <p>{{ citySearch }}</p>
     </div>
     <script src="/lib/angular/angular.min.js"></script>
+    <script src="/public/javascript/services.js"></script>
     <script src="/public/javascript/provinceCtrl.js"></script>
     <script src="/public/javascript/app.js"></script>
   </body>
