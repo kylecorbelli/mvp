@@ -4,7 +4,7 @@
   "description": "search for cities and towns online the same way you'd search for a home online. Filter by criteria, get the facts, and find a city you love for the city it is.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "node ./server/bin/www"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/pacificLiving/2016-01-mvp#readme",
   "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.3",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
     "async": "^1.5.2",
     "cheerio": "^0.20.0",
     "request": "^2.69.0"
