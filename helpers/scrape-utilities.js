@@ -8,6 +8,7 @@ var states = {
   mi: 'michigan',
   nc: 'north-carolina',
   or: 'oregon',
+  sc: 'south-carolina',
   tx: 'texas'
 };
 
@@ -31,6 +32,28 @@ var getSperlingStats = function(cityInputText, cityObj, done) {
         .text()
         .trim();
       cityObj.rainyDays = parseInt(rainyDays);
+
+      var julyHigh = $('#mainContent_dgClimate')
+        .find('tr:nth-child(6)')
+        .find('td:nth-child(2)')
+        .text()
+        .trim();
+      cityObj.julyHigh = parseInt(julyHigh);
+
+      var januaryLow = $('#mainContent_dgClimate')
+        .find('tr:nth-child(7)')
+        .find('td:nth-child(2)')
+        .text()
+        .trim();
+      cityObj.januaryLow = parseInt(januaryLow);
+
+      var snowfall = $('#mainContent_dgClimate')
+        .find('tr:nth-child(3)')
+        .find('td:nth-child(2)')
+        .text()
+        .trim();
+      cityObj.snowfall = parseInt(snowfall);
+
       done();
     }
   });
@@ -391,27 +414,37 @@ function cityUrlEncode(cityString, dataSource) {
       return 'http://www.indeed.com/jobs?q=JavaScript&l=' + modifiedCityString;
     },
     trulia: function(cityArr) {
-      cityArr[cityArr.length - 1] = states[cityArr[cityArr.length - 1]];
-      for (var i = 0; i < cityArr.length; i++) {
+      var state = states[cityArr[cityArr.length - 1]];
+      var stateArr = state.split('-');
+      for (var i = 0; i < stateArr.length; i++) {
+        stateArr[i] = stateArr[i][0].toUpperCase() + stateArr[i].slice(1);
+      }
+      state = stateArr.join('_');
+      for (var i = 0; i < (cityArr.length - 1); i++) {
         cityArr[i] = cityArr[i][0].toUpperCase() + cityArr[i].slice(1);
       }
       var modifiedCityString = cityArr
         .slice(0, (cityArr.length - 1))
         .join('_');
-      return 'http://www.trulia.com/real_estate/' + modifiedCityString + '-' + cityArr[cityArr.length - 1] + '/';
+      return 'http://www.trulia.com/real_estate/' + modifiedCityString + '-' + state + '/';
     },
     zillow: function(cityArr) {
       return 'http://www.zillow.com/' + cityArr.join('-') + '/home-values/';
     },
     wikipedia: function(cityArr) {
-      cityArr[cityArr.length - 1] = states[cityArr[cityArr.length - 1]];
-      for (var i = 0; i < cityArr.length; i++) {
+      var state = states[cityArr[cityArr.length - 1]];
+      var stateArr = state.split('-');
+      for (var i = 0; i < stateArr.length; i++) {
+        stateArr[i] = stateArr[i][0].toUpperCase() + stateArr[i].slice(1);
+      }
+      state = stateArr.join('_');
+      for (var i = 0; i < (cityArr.length - 1); i++) {
         cityArr[i] = cityArr[i][0].toUpperCase() + cityArr[i].slice(1);
       }
       var modifiedCityString = cityArr
         .slice(0, (cityArr.length - 1))
         .join('_');
-      return 'https://en.wikipedia.org/wiki/' + modifiedCityString + ',_' + cityArr[cityArr.length - 1];
+      return 'https://en.wikipedia.org/wiki/' + modifiedCityString + ',_' + state;
     }
   };
   return sourceSpecificFn[dataSource](cityArr);
