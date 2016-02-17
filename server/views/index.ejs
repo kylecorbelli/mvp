@@ -22,7 +22,7 @@
               <input class="form-control" type="text" placeholder="second city..." ng-model="citySearch2">
             </div>
             <div class="form-group">
-              <button class="btn btn-primary btn-block">Compare</button>
+              <button id="input-btn" class="btn btn-block">Compare</button>
             </div>
           </form>
         </div>
@@ -95,8 +95,8 @@
             </tr>
             <tr>
               <td>Average JavaScript developer salary</td>
-              <td>{{ cityData1.jsDevSalary | number:0 }}</td>
-              <td>{{ cityData2.jsDevSalary | number:0 }}</td>
+              <td>{{ cityData1.jsDevSalary | currency:'$':0 }}</td>
+              <td>{{ cityData2.jsDevSalary | currency:'$':0 }}</td>
             </tr>
             <tr>
               <td>JavaScript jobs per 1,000 people</td>
@@ -124,13 +124,13 @@
             </tr>
             <tr>
               <td>Median home price</td>
-              <td>{{ cityData1.medianHomePrice | number:0 }}</td>
-              <td>{{ cityData2.medianHomePrice | number:0 }}</td>
+              <td>{{ cityData1.medianHomePrice | currency:'$':0 }}</td>
+              <td>{{ cityData2.medianHomePrice | currency:'$':0 }}</td>
             </tr>
             <tr>
               <td>Median monthly rent</td>
-              <td>{{ cityData1.medianRent | number:0 }}</td>
-              <td>{{ cityData2.medianRent | number:0 }}</td>
+              <td>{{ cityData1.medianRent | currency:'$':0 }}</td>
+              <td>{{ cityData2.medianRent | currency:'$':0 }}</td>
             </tr>
             <tr>
               <td>Percent of owner-occupants</td>
@@ -144,8 +144,8 @@
             </tr>
             <tr>
               <td>Annual cost of housing</td>
-              <td>{{ cityData1.annualCostOfHousing | number:0 }}</td>
-              <td>{{ cityData2.annualCostOfHousing | number:0 }}</td>
+              <td>{{ cityData1.annualCostOfHousing | currency:'$':0 }}</td>
+              <td>{{ cityData2.annualCostOfHousing | currency:'$':0 }}</td>
             </tr>
             <tr>
               <td></td>
