@@ -3,23 +3,33 @@
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Croissant+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/public/stylesheets/style.css" />
   </head>
   <body ng-app="province">
     <div class="container" ng-controller="provinceCtrl">
-      <h1><%= title %></h1>
-      <p>Welcome to <%= title %></p>
-      <form ng-submit="findCities()">
-        <div class="form-group">
-          <input class="form-control" type="text" placeholder="first city for comparison..." ng-model="citySearch1">
+      <div class="row top-row">
+        <div class="col-sm-4">
+          <h1 class="logo-text"><%= title %></h1>
+          <p>find where the grass is greener</p>
         </div>
-        <div class="form-group">
-          <input class="form-control" type="text" placeholder="second city for comparison..." ng-model="citySearch2">
+        <div class="col-sm-8 text-center">
+          <form class="form-inline" ng-submit="findCities()">
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="first city..." ng-model="citySearch1">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="second city..." ng-model="citySearch2">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">Compare</button>
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <button class="btn btn-primary">Find Cities</button>
-        </div>
-      </form>
+      </div>
+      <div class="loading" ng-show="showLoading && (!cityData1 || !cityData2)">
+        <img class="img-responsive" src="/public/images/loading.gif" alt="loading...">
+      </div>
       <div class="well" ng-show="cityData1 && cityData2">
         <table class="table table-striped table-hover">
           <thead>
