@@ -14,8 +14,8 @@ City.prototype.computeStats = function() {
     this.annualCostOfHousing = (this.percentRenters * annualRent) + (this.percentOwnerOccs * annualPITI);
   }
   this.numberOfDevIncomesNeededToAfford = this.annualCostOfHousing / 0.35 / this.jsDevSalary;
-  this.costOfASunnyDay = (this.jsDevSalary - this.annualCostOfHousing) / this.sunnyDays;
-  this.pricePerSqFtOfOutdoorSpace = (this.jsDevSalary - this.annualCostOfHousing) / this.outdoorSpacePerPerson;
+  this.costOfASunnyDay = this.annualCostOfHousing / this.sunnyDays;
+  this.pricePerSqFtOfOutdoorSpace = this.annualCostOfHousing / this.outdoorSpacePerPerson;
 };
 
 // Helper function to compute monthy Principal, Interest, Taxes and Insurance
