@@ -29,7 +29,7 @@ module.exports = {
   nv: 'nevada',
   nh: 'new-hampshire',
   nj: 'new-jersey',
-  nm: 'new-mixico',
+  nm: 'new-mexico',
   ny: 'new-york',
   nc: 'north-carolina',
   nd: 'north-dakota',
