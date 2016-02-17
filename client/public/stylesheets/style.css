@@ -1,7 +1,28 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Overlock);
+
+* {
+  border: solid 1px red;
 }
+
+body {
+  font: 14px "Calibri", Arial, sans-serif;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.logo-text {
+  font-family: 'Overlock', cursive;
+  color: blue;
+  /*font-weight: bold;*/
+}
+
+.top-row {
+  padding-top: 10px;
+}
+
 
 a {
   color: #00B7FF;
@@ -22,4 +43,13 @@ table td {
 
 table tr td:first-child {
   text-align: left;
+}
+
+.loading {
+  text-align: center;
+}
+
+.loading img {
+  margin-left: auto;
+  margin-right: auto;
 }
