@@ -53,8 +53,32 @@ table tr td:first-child {
 #input-btn {
   background-color: #4AAB00;
   border: solid 1px #398500;
+  color: white;
 }
 
 #input-btn:hover {
   background-color: #398500;
+}
+
+.big-logo-container {
+  margin-top: 150px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.big-logo {
+  font-size: 184px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.big-catch-phrase {
+  font-size: 48px;
+}
+
+.little-logo {
+  cursor: pointer;
 }
