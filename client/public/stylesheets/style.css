@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Overlock);
 
-* {
-  border: solid 1px red;
-}
-
 body {
   font: 14px "Calibri", Arial, sans-serif;
 }
@@ -15,7 +11,7 @@ h1 {
 
 .logo-text {
   font-family: 'Overlock', cursive;
-  color: blue;
+  color: #4AAB00;
   /*font-weight: bold;*/
 }
 
@@ -52,4 +48,13 @@ table tr td:first-child {
 .loading img {
   margin-left: auto;
   margin-right: auto;
+}
+
+#input-btn {
+  background-color: #4AAB00;
+  border: solid 1px #398500;
+}
+
+#input-btn:hover {
+  background-color: #398500;
 }
