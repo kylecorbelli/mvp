@@ -16,5 +16,11 @@ angular.module('province.ctrl', [])
           console.log('in ctrl, res.data: ', res.data);
         });
     };
+    $scope.hideBigLogo = function() {
+      $scope.bigLogoHidden = true;
+    };
+    $scope.showBigLogo = function() {
+      $scope.bigLogoHidden = false;
+    };
   });
   
