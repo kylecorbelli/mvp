@@ -27,8 +27,6 @@ app.get('/', function(req, res) {
 });
 
 app.post('/city', function(req, res) {
-  console.log('post request with req.body:');
-  console.log(req.body);
   var cityNameInputText = req.body.cityNameText;
   scrape.getUniqueCityName(cityNameInputText, function(uniqueCityName) {
     dbUtil.isInDatabase(uniqueCityName, function(found) {
@@ -38,7 +36,6 @@ app.post('/city', function(req, res) {
         });
       } else {
         scrape.createNewCity(cityNameInputText, function(city) {
-          console.log('should be done');
           dbUtil.insertCity(city, function() {
             res.json(city);
           });
