@@ -4,7 +4,7 @@
   "description": "search for cities and towns online the same way you'd search for a home online. Filter by criteria, get the facts, and find a city you love for the city it is.",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server/bin/www"
+    "start": "nodemon ./server/bin/www"
   },
   "repository": {
     "type": "git",
