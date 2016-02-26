@@ -8,12 +8,10 @@ angular.module('province.ctrl', [])
       Cities.findCity($scope.citySearch1)
         .then(function(res) {
           $scope.cityData1 = res.data;
-          console.log('in ctrl, res.data: ', res.data);
         });
       Cities.findCity($scope.citySearch2)
         .then(function(res) {
           $scope.cityData2 = res.data;
-          console.log('in ctrl, res.data: ', res.data);
         });
     };
     $scope.hideBigLogo = function() {
@@ -23,4 +21,3 @@ angular.module('province.ctrl', [])
       $scope.bigLogoHidden = false;
     };
   });
-  
