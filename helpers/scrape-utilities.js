@@ -309,10 +309,9 @@ var getMortgageStats = function(cityInputText, cityObj, done) {
     } else {
       var $ = cheerio.load(body);
       var thirtyYearMortgageRate = $('.rate_averages_mod')
-        .find('tr.rate_change_up')
-        .first()
         .find('td.rate')
         .find('a')
+        .first()
         .text()
         .trim()
         .replace('%', '');
