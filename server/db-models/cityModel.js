@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var CitySchema = new mongoose.Schema({
   annualCostOfHousing: Number,
+  annualSavings: Number,
   averageCommute: String,
   bachelorsOrHigher: String,
   costOfASunnyDay: Number,

@@ -113,6 +113,11 @@
               <td>{{ cityData2.numberOfDevIncomesNeededToAfford | number:2 }}</td>
             </tr>
             <tr>
+              <td>Annual savings (net salary less cost of housing)</td>
+              <td>{{ cityData1.annualSavings | currency:'$':0 }}</td>
+              <td>{{ cityData2.annualSavings | currency:'$':0 }}</td>
+            </tr>
+            <tr>
               <td>Unemployment rate</td>
               <td>{{ cityData1.unemployment }}</td>
               <td>{{ cityData2.unemployment }}</td>

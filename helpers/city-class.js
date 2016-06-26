@@ -14,6 +14,7 @@ City.prototype.computeStats = function() {
     this.annualCostOfHousing = (this.percentRenters * annualRent) + (this.percentOwnerOccs * annualPITI);
   }
   this.numberOfDevIncomesNeededToAfford = this.annualCostOfHousing / 0.35 / this.jsDevSalary;
+  this.annualSavings = (this.jsDevSalary * (1 - 0.28)) - this.annualCostOfHousing;
   this.costOfASunnyDay = this.annualCostOfHousing / this.sunnyDays;
   this.pricePerSqFtOfOutdoorSpace = this.annualCostOfHousing / this.outdoorSpacePerPerson;
 };
