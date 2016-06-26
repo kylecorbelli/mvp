@@ -37,10 +37,3 @@ module.exports.insertCity = function(cityObj, callback) {
     callback();
   });
 };
-
-// isInDatabase(process.argv[2]);
-
-// module.exports.insertCity({name: "San Clemente, CA"}, function(city) {
-//   console.log('new city:');
-//   console.log(city);
-// });
